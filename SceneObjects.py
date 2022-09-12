@@ -15,11 +15,12 @@ class Objects():
         engine.AddAnimation("NOTEXTURE", ["NOTEXTURE"], framerate=1, loop=False) #WILL POSSIBLY MOVE TO DIFFERENT FILE LATER, AS OF RIGHT NOW DO NOT REMOVE THIS
         #END OF ROOT ALLOCATIONS
 
-        MainMenu = Generic.Create(engine)
-        MainMenu.gameObject.size = engine._Globals._display
-        MainMenu.gameObject.position = Types.Vector3(0, 0, 0)
-        MainMenu.gameObject.name = "MAINMENU"
-        self.ObjectList.append(MainMenu)
+        Template = Generic.Create(engine)
+        Template.gameObject.size = engine._Globals._display
+        Template.gameObject.position = Types.Vector3(0, 0, 0)
+        Template.gameObject.name = "This template is to show the basic structure of object instantiation."
+        Template.gameObject.color = (200, 200, 200)
+        self.ObjectList.append(Template)
 
     def get(self):
         return tuple(self.ObjectList)
