@@ -90,8 +90,9 @@ class GameObject():
         self._size = Vector2(1,1)
         self._rotation = 0
         self._transparency = 0
-        self.color = (255,255,255)
-        self.name = "New GameObject"
+        self.color = (0,0,0)
+        self.name = "GameObject Component"
+        self.description = "A GameObject component."
         self._image = None
         self._textFont = pygame.font.Font("_ROOT\\RegFont.ttf",  30)
         self._text = None

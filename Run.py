@@ -8,7 +8,7 @@ class Globals:
   
 class Main():
   def __init__(self, initialStart=True):
-    self._STARTENGINE(initialStart=initialStart)
+    self._PRESTART(initialStart=initialStart)
     
   def Reload(self):
     del Globals.engine
@@ -28,9 +28,6 @@ class Main():
   def _APPENDSCENEOBJECT(self, objectTuple):
     for _object in objectTuple:
       Globals.engine.CreateNewObject(_object)
-      
-  def _STARTENGINE(self, initialStart=True):
-    self._PRESTART(initialStart=initialStart)
     
   def _POSTSTART(self):
     Globals.engine.SetCaption(SceneObjects.Injections.caption)

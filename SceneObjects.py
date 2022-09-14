@@ -8,25 +8,27 @@ class Objects():
     def __init__(self, engine: Engine):
         self.ObjectList = []
         self._engine = engine
+
         #START OF ROOT ALLOCATIONS, DO NOT REMOVE OR BAD THINGS MAY HAPPEN
         engine.SetUniversal("STARTED", False)
-        engine.AddImageAsset("NOTEXTURE", "_ROOT\\NOTEXTURE.png") #WILL POSSIBLY MOVE TO DIFFERENT FILE LATER, AS OF RIGHT NOW DO NOT REMOVE THIS
-        engine.AddImageAsset("NOTEXTURE_GRAYSCALE", "_ROOT\\NOTEXTUREGRAYSCALE.png") #WILL POSSIBLY MOVE TO DIFFERENT FILE LATER, AS OF RIGHT NOW DO NOT REMOVE THIS
-        engine.AddAnimation("NOTEXTURE", ["NOTEXTURE"], framerate=1, loop=False) #WILL POSSIBLY MOVE TO DIFFERENT FILE LATER, AS OF RIGHT NOW DO NOT REMOVE THIS
+        engine.AddImageAsset("NOTEXTURE", "_ROOT\\NOTEXTURE.png")
+        engine.AddImageAsset("NOTEXTURE_GRAYSCALE", "_ROOT\\NOTEXTUREGRAYSCALE.png")
+        engine.AddAnimation("NOTEXTURE", ["NOTEXTURE"], framerate=1, loop=False)
         #END OF ROOT ALLOCATIONS
 
         Template = Generic.Create(engine)
         Template.gameObject.size = engine._Globals._display
         Template.gameObject.position = Types.Vector3(0, 0, 0)
-        Template.gameObject.name = "This template is to show the basic structure of object instantiation."
+        Template.gameObject.name = "Template"
+        Template.gameObject.description = "This template is to show the basic structure of object instantiation."
         Template.gameObject.color = (200, 200, 200)
-        self.ObjectList.append(Template)
+        self.ObjectList.append(Template) #
 
     def get(self):
         return tuple(self.ObjectList)
 
 class Injections():
-    caption = "PEnguine"
+    caption = "PEnguine Framework"
     dimensions = (314, 314)
     icon = "_ROOT\\NOTEXTURE.png"
     abstract = [
