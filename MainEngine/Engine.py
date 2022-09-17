@@ -11,9 +11,9 @@ import time
 class PregameSettings():
     def __init__(self, engine):
         self.engine = engine
-    def SetScreenDimensions(self, dimensions: Types.Vector2):
-        self.engine._Globals.screen = pygame.display.set_mode(dimensions.whole)
-        self.engine._Globals.display = dimensions.whole  
+    def SetScreenDimensions(self, dimensions: pygame.math.Vector2):
+        self.engine._Globals.screen = pygame.display.set_mode(dimensions)
+        self.engine._Globals.display = dimensions
 class Engine():
     def __init__(self, initialStart=True):
         if initialStart is True:
@@ -229,9 +229,5 @@ class Engine():
             return self._display
         @display.setter
         def display(self, value):
-            if (type(value) == tuple):
-                self._display = value
-            else:
-                self._display = value.whole
-
+            self._display = value
             self._screen = pygame.display.set_mode(self._display)

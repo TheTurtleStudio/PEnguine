@@ -2,6 +2,7 @@ import threading
 import os
 import Patch
 import SceneObjects
+import pygame
 class Globals:
   engine = None
   
@@ -22,7 +23,7 @@ class Main():
     Globals.engine = None
     Globals.engine = Engine.Engine(initialStart=initialStart)
     settings = Engine.PregameSettings(Globals.engine)
-    settings.SetScreenDimensions(Types.Vector2(SceneObjects.Injections.dimensions[0], SceneObjects.Injections.dimensions[1]))
+    settings.SetScreenDimensions(pygame.math.Vector2(SceneObjects.Injections.dimensions[0], SceneObjects.Injections.dimensions[1]))
     del settings
 
   def _APPENDSCENEOBJECT(self, objectTuple):

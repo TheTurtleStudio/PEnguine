@@ -3,12 +3,11 @@ import pygame
 
 class Sheets():
     @staticmethod
-    def Disect(engine, sheetPath: str, spriteDimensions: Types.Vector2, amount: int, offset: int=0,):
-        #Convert whatever it is to Vector2
-        if (type(spriteDimensions) == Types.Vector3):
-            spriteDimensions = Types.Vector2(spriteDimensions.x, spriteDimensions.y)
+    def Disect(engine, sheetPath: str, spriteDimensions: pygame.math.Vector2, amount: int, offset: int=0,):
+        if (type(spriteDimensions) == pygame.math.Vector3):
+            spriteDimensions = pygame.math.Vector2(spriteDimensions.x, spriteDimensions.y)
         if (type(spriteDimensions) == tuple):
-            spriteDimensions = Types.Vector2(spriteDimensions[0], spriteDimensions[1])
+            spriteDimensions = pygame.math.Vector2(spriteDimensions[0], spriteDimensions[1])
 
         sheet = engine.GetImageAsset(sheetPath)
         if (sheet == None):

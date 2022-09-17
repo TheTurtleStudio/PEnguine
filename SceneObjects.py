@@ -2,6 +2,7 @@ from MainEngine import ImageManipulation
 from MainEngine import Types
 from MainEngine.Engine import Engine
 from Behaviors import Generic
+from pygame.math import Vector3
 import pygame
 
 class Objects():
@@ -18,7 +19,7 @@ class Objects():
 
         Template = Generic.Create(engine)
         Template.gameObject.size = engine._Globals._display
-        Template.gameObject.position = Types.Vector3(0, 0, 0)
+        Template.gameObject.position = Vector3(0, 0, 0)
         Template.gameObject.name = "Template"
         Template.gameObject.description = "This template is to show the basic structure of object instantiation."
         Template.gameObject.color = (200, 200, 200)
