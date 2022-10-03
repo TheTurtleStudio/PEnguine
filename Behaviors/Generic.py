@@ -1,4 +1,5 @@
 from MainEngine import Types #NEEDED. Mainly for Types.GameObject creation.
+import CustomTypes
 import pygame
 class Generic(): #Change this to the name of your behavior
     def __init__(self, engine):
