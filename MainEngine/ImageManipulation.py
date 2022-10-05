@@ -3,7 +3,7 @@ import pygame
 
 class Sheets():
     @staticmethod
-    def Disect(engine, sheetPath: str, spriteDimensions: pygame.math.Vector2, amount: int, offset: int=0,):
+    def Disect(engine, sheetPath: str, spriteDimensions: pygame.math.Vector2, amount: int, offset: int=0,): #Extracts images from spritesheets and outputs an array.
         if (type(spriteDimensions) == pygame.math.Vector3):
             spriteDimensions = pygame.math.Vector2(spriteDimensions.x, spriteDimensions.y)
         if (type(spriteDimensions) == tuple):

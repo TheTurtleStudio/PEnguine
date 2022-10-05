@@ -18,7 +18,7 @@ class Generic(): #Change this to the name of your behavior
 
 class Create():
     def __init__(self, engine):
-        self.obj: Generic = Generic(engine) #Replace "Generic" with the name of your behavior
+        self.obj: Generic = Generic(engine) #Replace both "Generic"s with the name of your behavior
         self.obj.creator = self
     
     @property

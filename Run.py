@@ -11,15 +11,15 @@ class Main():
   def __init__(self, initialStart=True):
     self._PRESTART(initialStart=initialStart)
     
-  def Reload(self):
+  def Reload(self): #"Restarts" the program without actually restarting
     del Globals.engine
     self.__init__(initialStart=False)
     Globals.engine.Start(self)
 
   def _PRESTART(self, initialStart=True):
-    Patch.Validate()
-    from MainEngine import Types
-    from MainEngine import Engine
+    Patch.Validate() #Make sure all the necessary folders are intact and repairs if needed
+    from MainEngine import Types #We import after patching just so we don't break anything :)
+    from MainEngine import Engine #We import after patching just so we don't break anything :)
     Globals.engine = None
     Globals.engine = Engine.Engine(initialStart=initialStart)
     settings = Engine.PregameSettings(Globals.engine)

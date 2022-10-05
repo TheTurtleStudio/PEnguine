@@ -260,5 +260,5 @@ class Sprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.ORIGINALIMAGE = self.image
 
-class CollisionLayer():
+class CollisionLayer(): #Used for collision, duh
     GENERIC = "GENERIC"

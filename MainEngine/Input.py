@@ -1,7 +1,7 @@
 import pygame
 
 
-class InputHandler():
+class InputHandler(): #To test for events, use "self.engine.Input.TestFor.EVENT_HANDLER_HERE"
     def __init__(self, engine):
         self.events = []
         self.engine = engine

@@ -2,6 +2,7 @@ from MainEngine import ImageManipulation
 from MainEngine import Types
 from MainEngine.Engine import Engine
 from Behaviors import Generic
+
 from pygame.math import Vector3
 import pygame
 
@@ -10,12 +11,12 @@ class Objects():
         self.ObjectList = []
         self._engine = engine
 
-        #START OF ROOT ALLOCATIONS, DO NOT REMOVE OR BAD THINGS MAY HAPPEN
+        #START OF ENGINE NEEDED, DO NOT REMOVE OR BAD THINGS MAY HAPPEN
         engine.SetUniversal("STARTED", False)
         engine.AddImageAsset("NOTEXTURE", "_ROOT\\NOTEXTURE.png")
         engine.AddImageAsset("NOTEXTURE_GRAYSCALE", "_ROOT\\NOTEXTUREGRAYSCALE.png")
         engine.AddAnimation("NOTEXTURE", ["NOTEXTURE"], framerate=1, loop=False)
-        #END OF ROOT ALLOCATIONS
+        #END OF ENGINE NEEDED
 
         Template = Generic.Create(engine)
         Template.gameObject.size = engine._Globals._display
@@ -23,12 +24,12 @@ class Objects():
         Template.gameObject.name = "Template"
         Template.gameObject.description = "This template is to show the basic structure of object instantiation."
         Template.gameObject.color = (200, 200, 200)
-        self.ObjectList.append(Template) #
+        self.ObjectList.append(Template)
 
     def get(self):
         return tuple(self.ObjectList)
 
-class Injections():
+class Injections(): #Where we change attributes of the window and do custom thingies
     caption = "PEnguine Framework"
     dimensions = (314, 314)
     icon = "_ROOT\\NOTEXTURE.png"
