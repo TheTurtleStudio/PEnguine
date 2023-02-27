@@ -1,3 +1,5 @@
+if __name__ == "__main__":
+    quit()
 import os, sys
 from _ROOT.PEnguineLogger import print
 from _ROOT import PEnguineLogger
@@ -15,5 +17,4 @@ def Validate():
 def ThrowError(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
   
-if __name__ == "__main__":
-    Validate()
+Validate()

@@ -1,22 +1,19 @@
+if __name__ == "__main__":
+    quit()
 from MainEngine import ImageManipulation
 from MainEngine import Types
 from MainEngine.Engine import Engine
+from MainEngine import EngineCore
 from Behaviors import Generic
 
 from pygame.math import Vector3
 import pygame
 
-class Objects():
+class Objects(EngineCore.EngineObjects):
     def __init__(self, engine: Engine):
         self.ObjectList = []
         self._engine = engine
-
-        #START OF ENGINE NEEDED, DO NOT REMOVE OR BAD THINGS MAY HAPPEN
-        engine.SetUniversal("STARTED", False)
-        engine.AddImageAsset("NOTEXTURE", "_ROOT\\NOTEXTURE.png")
-        engine.AddImageAsset("NOTEXTURE_GRAYSCALE", "_ROOT\\NOTEXTUREGRAYSCALE.png")
-        engine.AddAnimation("NOTEXTURE", ["NOTEXTURE"], framerate=1, loop=False)
-        #END OF ENGINE NEEDED
+        self.EngineCore(engine) #Needed by PEnguine
 
         Template = Generic.Create(engine)
         Template.gameObject.size = engine._Globals._display
