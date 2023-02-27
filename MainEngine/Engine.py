@@ -1,9 +1,6 @@
 import pygame, threading
-from MainEngine import BMathL
-from MainEngine import Input
+from MainEngine import EngineUtils
 from MainEngine import Types
-from MainEngine import Collision
-from MainEngine import ImageManipulation
 import Run
 import time
 
@@ -33,8 +30,8 @@ class Engine():
 
     def Start(self, main: Run.Main): #Start the main gameloop
         self._Globals.clock = pygame.time.Clock()
-        self.Input = Input.InputHandler(self)
-        self.Collisions = Collision.Collision(self)
+        self.Input = EngineUtils.InputHandler(self)
+        self.Collisions = EngineUtils.Collision(self)
         main._POSTSTART()
         self.mainReference = main
         while True:
@@ -141,7 +138,7 @@ class Engine():
                     array.append(obj.gameObject.position.z) #Add z-component of position to sorting array
                     linkedObjArray.append(obj) #Add behavior to sorting array to be sorted by z-layer
             n = len(array)
-            BMathL.Math.QuickSort.LinkedObject.QuickSort(array, linkedObjArray, 0, n-1) #Use our linked object quicksort algorithm
+            EngineUtils.MathTools.QuickSort.LinkedObject.QuickSort(array, linkedObjArray, 0, n-1) #Use our linked object quicksort algorithm
             return (linkedObjArray, array)
         del array, linkedObjArray, sOA_copy
         return None

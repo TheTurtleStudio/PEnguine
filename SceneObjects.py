@@ -1,6 +1,6 @@
 if __name__ == "__main__":
     quit()
-from MainEngine import ImageManipulation
+from MainEngine import EngineUtils
 from MainEngine import Types
 from MainEngine.Engine import Engine
 from MainEngine import EngineCore
@@ -13,15 +13,20 @@ class Objects(EngineCore.EngineObjects):
     def __init__(self, engine: Engine):
         self.ObjectList = []
         self._engine = engine
-        self.EngineCore(engine) #Needed by PEnguine
+        self.EngineCore(engine)
 
-        Template = Generic.Create(engine)
-        Template.gameObject.size = engine._Globals._display
-        Template.gameObject.position = Vector3(0, 0, 0)
-        Template.gameObject.name = "Template"
-        Template.gameObject.description = "This template is to show the basic structure of object instantiation."
-        Template.gameObject.color = (200, 200, 200)
-        self.ObjectList.append(Template)
+        
+        StarterObject = Generic.Create(engine)
+        StarterObject.gameObject.size = engine._Globals._display
+        StarterObject.gameObject.position = Vector3(0, 0, 0)
+        StarterObject.gameObject.name = "Starter Object"
+        StarterObject.gameObject.description = "This object is to show the basic structure of object instantiation."
+        StarterObject.gameObject.color = (200, 200, 200)
+
+        #Below is in testing
+        #for var in dir():
+        #    exec(f"""if (type({var}).__name__) == 'Create': self.ObjectList.append({var})""")
+        self.ObjectList.append(StarterObject)
 
     def get(self):
         return tuple(self.ObjectList)
