@@ -10,33 +10,40 @@ from pygame.math import Vector3
 import pygame
 
 class Objects(EngineCore.EngineObjects):
+    ObjectList = []
     def __init__(self, engine: Engine):
-        self.ObjectList = []
         self._engine = engine
         self.EngineCore(engine)
 
         
-        StarterObject = Generic.Create(engine)
-        StarterObject.gameObject.size = engine._Globals._display
+        self.CreateBehaviors()
+
+
+        
+    def get(self):
+        return tuple(self.ObjectList)
+    def CreateBehaviors(self):
+
+        #CREATE ALL OF YOUR BEHAVIORS FROM HERE ...
+        StarterObject = Generic.Create(self._engine)
+        StarterObject.gameObject.size = self._engine._Globals._display
         StarterObject.gameObject.position = Vector3(0, 0, 0)
         StarterObject.gameObject.name = "Starter Object"
         StarterObject.gameObject.description = "This object is to show the basic structure of object instantiation."
         StarterObject.gameObject.color = (200, 200, 200)
+        #... TO HERE, or really just before the "for var in dir()" line
 
-        #Below is in testing
-        #for var in dir():
-        #    exec(f"""if (type({var}).__name__) == 'Create': self.ObjectList.append({var})""")
-        self.ObjectList.append(StarterObject)
+        #Automatically adding all instantiated behaviors to the subscriber/render list
+        for var in dir():   exec(f"""if (type({var}).__name__) == 'Create': self.ObjectList.append({var})""")
+        
 
-    def get(self):
-        return tuple(self.ObjectList)
-
-class Injections(): #Where we change attributes of the window and do custom thingies
+#Injections include special information about the window, as well as some abstract code you can run.
+class Injections():
     caption = "PEnguine Framework"
     dimensions = (314, 314)
     icon = "_ROOT\\NOTEXTURE.png"
     abstract = [
         "#This is raw code to be after all other injections are made",
         "#Put every piece of code encapsulated in a string as a new item in the list.",
-        "print(\"Injections complete\") #This is for debugging though!",
+        "print(\"Injections complete\") #This is for demonstration purposes though!",
     ]
