@@ -24,6 +24,7 @@ class Main():
     Globals.engine = Engine.Engine(initialStart=initialStart)
     settings = Engine.PregameSettings(Globals.engine)
     settings.SetScreenDimensions(pygame.math.Vector2(SceneObjects.Injections.dimensions[0], SceneObjects.Injections.dimensions[1]))
+    settings.SetMaxFramerate(SceneObjects.Injections.targetFrameRate)
     del settings
 
   def _APPENDSCENEOBJECT(self, objectTuple):

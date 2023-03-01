@@ -11,6 +11,8 @@ class PregameSettings():
     def SetScreenDimensions(self, dimensions: pygame.math.Vector2):
         self.engine._Globals.screen = pygame.display.set_mode(dimensions)
         self.engine._Globals.display = dimensions
+    def SetMaxFramerate(self, rate):
+        self.engine._Globals.maxFramerate = rate
 class Engine():
     def __init__(self, initialStart=True):
         if initialStart is True:
@@ -28,7 +30,7 @@ class Engine():
         else:
             print("Can only set timeScale to a numeric value.")
 
-    def Start(self, main: Run.Main): #Start the main gameloop
+    def Start(self, main: Run.Main):
         self._Globals.clock = pygame.time.Clock()
         self.Input = EngineUtils.InputHandler(self)
         self.Collisions = EngineUtils.Collision(self)
@@ -84,12 +86,10 @@ class Engine():
         return None
 
     def FrameEvents(self): #Runs events that are scheduled to run on this frame
-        self._Globals.clock.tick(60)
+        timeStamp1 = time.time()
+        self._Globals.clock.tick(self._Globals.maxFramerate)
         self._Globals.lastRunTime = self._Globals.currentRunTime
         self._Globals.currentRunTime = pygame.time.get_ticks()
-        waitTime = 1000/60 - (self._Globals.currentRunTime - self._Globals.lastRunTime)
-        if waitTime > 0:
-            pygame.time.delay(round(waitTime))
         
         self._Globals._totalTime += self.GetDeltaTime()
         self._PostEventsToInput()
@@ -99,6 +99,9 @@ class Engine():
             self.Quit()
         self.Input.clearEvents()
         self.Render() #Call a render update
+        timeStamp2 = time.time()
+        if (1/(timeStamp2 - timeStamp1)) > self._Globals.maxFramerate:
+            pygame.time.delay(round((1/self._Globals.maxFramerate) - (timeStamp2 - timeStamp1)))
 
     def CreateNewObject(self, _object): #Adds an instantiated object to the scene to be rendered. Intended to be called from inside behaviors.
         try:
@@ -122,7 +125,7 @@ class Engine():
 
     def GetDeltaTimeRAW(self): #Returns the raw seconds from the last frame.
         timeRaw = ((self._Globals.currentRunTime - self._Globals.lastRunTime)) / 1000
-        timeRaw = timeRaw if timeRaw > 1/60 else 1/60
+        timeRaw = timeRaw if timeRaw > 1/self._Globals.maxFramerate else 1/self._Globals.maxFramerate
         return timeRaw
 
     def GetTotalTime(self): #Returns the total amount of time since the engine was created.
@@ -217,6 +220,7 @@ class Engine():
         lastRunTime = pygame.time.get_ticks()
         currentRunTime = pygame.time.get_ticks()
         Universals = {}
+        maxFramerate = 60
 
         _screen = pygame.display.set_mode(_display)
         timeScale = 1

@@ -74,9 +74,9 @@ class MathTools():
                 if len(arr) == 1:
                     return (arr, linkedObjArr)
                 if low < high:
-                    pi = LinkedObject._partition(arr, linkedObjArr, low, high)
-                    LinkedObject.QuickSort(arr, linkedObjArr, low, pi-1)
-                    LinkedObject.QuickSort(arr, linkedObjArr, pi+1, high)
+                    pi = MathTools.QuickSort.LinkedObject._partition(arr, linkedObjArr, low, high)
+                    MathTools.QuickSort.LinkedObject.QuickSort(arr, linkedObjArr, low, pi-1)
+                    MathTools.QuickSort.LinkedObject.QuickSort(arr, linkedObjArr, pi+1, high)
 
 
 class Sheets():
