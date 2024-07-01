@@ -1,6 +1,7 @@
 import pygame, threading
 from MainEngine import EngineUtils
 from MainEngine import Types
+from _ROOT import PEnguineLogger
 import Run
 import time
 
@@ -28,7 +29,7 @@ class Engine():
         if (type(value) == float) or (type(value) == int):
             self._Globals.timeScale = value
         else:
-            print("Can only set timeScale to a numeric value.")
+            PEnguineLogger.print(f"CRITICAL: timeScale must be set to a numerical value. GIVEN: {value}")
 
     def Start(self, main: Run.Main):
         self._Globals.clock = pygame.time.Clock()
@@ -100,16 +101,23 @@ class Engine():
         self.Input.clearEvents()
         self.Render() #Call a render update
         timeStamp2 = time.time()
-        if (1/(timeStamp2 - timeStamp1)) > self._Globals.maxFramerate:
-            pygame.time.delay(round((1/self._Globals.maxFramerate) - (timeStamp2 - timeStamp1)))
+        try:
+            if (1/(timeStamp2 - timeStamp1)) > self._Globals.maxFramerate:
+                pygame.time.delay(round((1/self._Globals.maxFramerate) - (timeStamp2 - timeStamp1)))
+        except ZeroDivisionError:
+            PEnguineLogger.write(f"WARNING: FrameEvents too quick ({timeStamp1}ms-{timeStamp2}ms)! Window moved?")
 
-    def CreateNewObject(self, _object): #Adds an instantiated object to the scene to be rendered. Intended to be called from inside behaviors.
+    def Subscribe(self, _object): #Adds an instantiated object to the scene to be rendered. Intended to be called from inside behaviors.
         try:
             self._Globals.sceneObjectsArray.append(_object)
             _object.obj.Start()
         except AttributeError:
             pass
-
+    
+    def Unsubscribe(self, _object): #Unsubscribing stops the engine from updating & rendering the object. The object stays in memory until the object is destroyed through the Destroy method.
+        if (_object in self._Globals.sceneObjectsArray):
+            self._Globals.sceneObjectsArray.remove(_object)
+    
     def _PostEventsToInput(self):
         self.Input.postEvents(pygame.event.get())
 
@@ -187,7 +195,7 @@ class Engine():
         elif type(value) == pygame.Surface:
             self._Globals.Assets[key] = value.convert_alpha() if transparency else value
         else:
-            print("Can only import lists of paths or paths.")
+            PEnguineLogger.print(f"CRITICAL: Image path must be type str, list, or pygame.Surface. GIVEN: {type(value)}")
 
     def GetImageAsset(self, key: str or pygame.Surface) -> pygame.Surface: #Grabs a loaded image from memory using the specified key.
         try:

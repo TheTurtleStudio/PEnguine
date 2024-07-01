@@ -20,7 +20,6 @@ class Main():
     Patch.Validate() #Make sure all the necessary folders are intact and repairs if needed
     from MainEngine import Types #We import after patching just so we don't break anything :)
     from MainEngine import Engine #We import after patching just so we don't break anything :)
-    Globals.engine = None
     Globals.engine = Engine.Engine(initialStart=initialStart)
     settings = Engine.PregameSettings(Globals.engine)
     settings.SetScreenDimensions(pygame.math.Vector2(SceneObjects.Injections.dimensions[0], SceneObjects.Injections.dimensions[1]))
@@ -29,7 +28,7 @@ class Main():
 
   def _APPENDSCENEOBJECT(self, objectTuple):
     for _object in objectTuple:
-      Globals.engine.CreateNewObject(_object)
+      Globals.engine.Subscribe(_object)
     
   def _POSTSTART(self):
     Globals.engine.SetCaption(SceneObjects.Injections.caption)

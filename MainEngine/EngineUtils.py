@@ -52,9 +52,9 @@ class MathTools():
                 if len(arr) == 1:
                     return arr
                 if low < high:
-                    pi = Regular._partition(arr, low, high)
-                    Regular.QuickSort(arr, low, pi-1)
-                    Regular.QuickSort(arr, pi+1, high)
+                    pi = MathTools.QuickSort.Regular._partition(arr, low, high)
+                    MathTools.QuickSort.Regular.QuickSort(arr, low, pi-1)
+                    MathTools.QuickSort.Regular.QuickSort(arr, pi+1, high)
         class LinkedObject(): #Same as the above quicksort class. This one just attaches another list and sorts alongside the first. Used in render function to determine render priority more efficiently.
             @staticmethod
             def _partition(arr, linkedObjArr, low, high):
