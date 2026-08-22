@@ -5,24 +5,24 @@ class GameObject():
     def __init__(self, master):
         self._textColor = (255, 255, 255)
         self._master = master
-        self.sprite = Sprite()
         self._offset = pygame.math.Vector2()
-        self.position = pygame.math.Vector3()
         self._size = pygame.math.Vector2(1,1)
         self._rotation = 0
         self._transparency = 0
-        self.color = (0,0,0)
-        self.name = "GameObject Component"
-        self.description = "A GameObject component."
         self._image = None
         self._textFont = pygame.font.Font("_ROOT\\RegFont.ttf",  30)
         self._text = None
         self._textRender = None
         self._fontSize = 30
+        self.name = "GameObject Component"
+        self.description = "A GameObject component."
+        self.position = pygame.math.Vector3()
+        self.sprite = Sprite()
+        self.color = (0,0,0)
         self.isImage = False
         self.collisionLayer = CollisionLayer.GENERIC
         self.renderEnabled = True
-        self.textFormat = 1
+        self.textFormat = 1 # 0 = Centered, 1 = Top Centered
     
 
     @property
@@ -108,10 +108,10 @@ class GameObject():
         self._setSize(newValue)
     def _setSize(self, value, forceChange=False):
         valueAsV2 = value
-        shouldScale = not (self._size == valueAsV2)
+        shouldScale = self._size != valueAsV2
         if (type(value) == tuple):
             valueAsV2 = pygame.math.Vector2(value[0], value[1])
-        shouldScale = (not (self._size == valueAsV2)) or forceChange
+        shouldScale = (self._size != valueAsV2) or forceChange
         self._size = valueAsV2
         horizontalFlip = (valueAsV2.x < 0)
         verticalFlip = (valueAsV2.y < 0)
@@ -155,7 +155,7 @@ class GameObject():
         self.sprite.image.fill(self._color, special_flags=pygame.BLEND_MULT)
     def _syncOriginalImage(self):
         self.sprite.image = self.sprite.ORIGINALIMAGE
-        self._updateColor
+        self._updateColor() #Overlay color
         self.position = self._position
         self.sprite.rect = self.sprite.image.get_rect()
         self._setSize(self._size, forceChange=True)
