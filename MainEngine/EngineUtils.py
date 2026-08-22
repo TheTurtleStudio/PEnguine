@@ -158,9 +158,23 @@ class InputHandler(): #To test for events, use "self.engine.Input.TestFor.EVENT_
             return False
         def LEFTMOUSESTATE(self):
             return pygame.mouse.get_pressed()[2]
+        def KEYDOWN(self, key: pygame.key):
+            returnVal = self._testFor(pygame.KEYDOWN)
+            if returnVal[0]:
+                if (returnVal[1].key == key):
+                    return True
+            return False
         def KEYDOWN_ANY(self):
             return self._testFor(pygame.KEYDOWN)[0]
-        def KEYDOWN(self, key: pygame.key):
+        def KEYUP(self, key: pygame.key):
+            returnVal = self._testFor(pygame.KEYUP)
+            if returnVal[0]:
+                if (returnVal[1].key == key):
+                    return True
+            return False
+        def KEYUP_ANY(self):
+            return self._testFor(pygame.KEYUP)[0]
+        def KEYHELD(self, key: pygame.key):
             keys = pygame.key.get_pressed()
             if (keys[key]):
                 return True
