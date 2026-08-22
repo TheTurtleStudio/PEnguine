@@ -148,7 +148,7 @@ class InputHandler(): #To test for events, use "self.engine.Input.TestFor.EVENT_
                 if (returnVal[1].button == 1):
                     return True
             return False
-        def RIGHTMOUSESTATE(self):
+        def RIGHTMOUSEHELD(self):
             return pygame.mouse.get_pressed()[0]
         def LEFTMOUSEDOWN(self):
             returnVal = self._testFor(pygame.MOUSEBUTTONDOWN)
@@ -156,7 +156,7 @@ class InputHandler(): #To test for events, use "self.engine.Input.TestFor.EVENT_
                 if (returnVal[1].button == 3):
                     return True
             return False
-        def LEFTMOUSESTATE(self):
+        def LEFTMOUSEHELD(self):
             return pygame.mouse.get_pressed()[2]
         def KEYDOWN(self, key: pygame.key):
             returnVal = self._testFor(pygame.KEYDOWN)
