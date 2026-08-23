@@ -16,8 +16,8 @@ class GameObject():
         self._fontSize = 30
         self.name = "GameObject Component"
         self.description = "A GameObject component."
-        self.position = pygame.math.Vector3()
         self.sprite = Sprite()
+        self.position = pygame.math.Vector3()
         self.color = (0,0,0)
         self.isImage = False
         self.collisionLayer = CollisionLayer.GENERIC
