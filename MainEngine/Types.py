@@ -155,7 +155,6 @@ class GameObject():
         self.sprite.image.fill(self._color, special_flags=pygame.BLEND_MULT)
     def _syncOriginalImage(self):
         self.sprite.image = self.sprite.ORIGINALIMAGE
-        self._updateColor() #Overlay color
         self.position = self._position
         self.sprite.rect = self.sprite.image.get_rect()
         self._setSize(self._size, forceChange=True)
