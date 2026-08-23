@@ -11,7 +11,7 @@ class Main():
   def __init__(self, initialStart=True):
     self._PRESTART(initialStart=initialStart)
     
-  def Reload(self): #"Restarts" the program without actually restarting
+  def Reload(self): #"Restarts" the program without having to restart the window
     del Globals.engine
     self.__init__(initialStart=False)
     Globals.engine.Start(self)
